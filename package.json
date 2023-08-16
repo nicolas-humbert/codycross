@@ -1,0 +1,8 @@
+{
+  "name": "codycross",
+  "version": "1.0.0",
+  "description": "Outil pour trouver efficacement le mot du jour.",
+  "main": "index.js",
+  "author": "TinyBlondMan",
+  "license": "MIT"
+}
