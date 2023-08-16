@@ -4,5 +4,8 @@
   "description": "Outil pour trouver efficacement le mot du jour.",
   "main": "index.js",
   "author": "TinyBlondMan",
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "htmlparser2": "^9.0.0"
+  }
 }
