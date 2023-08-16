@@ -1,9 +1,8 @@
-const fs = require("fs");
-
-const alphabet = "abcdefghijklmnopqrstuvwxyz";
+import * as fs from "fs";
+import { ALPHABET } from "./constants.js";
 
 function getUsito(letter) {
-  fetch(`https://usito.usherbrooke.ca/index/mots#${letter}`)
+  fetch(`https://usito.usherbrooke.ca/index/mots/tous/${letter}#${letter}`)
     .then(function (response) {
       return response.text();
     })
@@ -21,8 +20,8 @@ function getUsito(letter) {
 }
 
 function iterateOnAlphabet() {
-  for (let char = 0; char < alphabet.length; char++) {
-    const letter = alphabet[char];
+  for (let char = 0; char < ALPHABET.length; char++) {
+    const letter = ALPHABET[char];
     getUsito(letter);
     console.log(`Lettre ${letter} en cours de traitement...`);
   }
