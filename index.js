@@ -1,41 +1,33 @@
 import * as fs from "fs";
 import { ALPHABET } from "./constants.js";
 
-function letterPageToArray(letter) {
-  let letterPage = fs.readFileSync(`./public/${letter}.txt`, {
+function openLengthFileToArray(length) {
+  let file = fs.readFileSync(`./public/${length}.txt`, {
     encoding: "utf-8",
   });
 
-  return letterPage.split(",");
+  return file.split(",");
 }
 
-function getWordsOfLengthX(wordsArr, size) {
-  let res = [];
-  for (let i = 0; i < wordsArr.length; i++) {
-    const w = wordsArr[i];
-    if (w.length == size) res.push(w);
-  }
+let fileArray5 = openLengthFileToArray(5);
+let fileArray6 = openLengthFileToArray(6);
+
+function filterByContainedLetter(arr, letter, notPosition) {
+  let res = arr.filter((w) => w.includes(letter) && w[notPosition] !== letter);
 
   return res;
 }
 
-function generateWordsFileByLength(length) {
-  let res = [];
-  for (let i = 0; i < ALPHABET.length; i++) {
-    const l = ALPHABET[i];
-
-    const letterArray = letterPageToArray(l);
-    const wordsOfLength = getWordsOfLengthX(letterArray, length);
-    res.push(wordsOfLength);
-  }
-
-  fs.writeFile(`./public/${length}.txt`, res.toString(), (err) => {
-    if (err) console.log(err);
-    else {
-      console.log(`File ${length}.txt written successfully.`);
-    }
-  });
+function filterByNotContainedLetter(arr, letter) {
+  let res = arr.filter((w) => !w.includes(letter));
+  return res;
 }
 
-generateWordsFileByLength(5);
-generateWordsFileByLength(6);
+function filterByValidLetter(arr, letter, position) {
+  let res = arr.filter((w) => w[position] === letter);
+  return res;
+}
+
+console.log(filterByContainedLetter(fileArray5, "h", 1));
+console.log(filterByNotContainedLetter(fileArray5, "e"));
+console.log(filterByValidLetter(fileArray5, "z", 3));
