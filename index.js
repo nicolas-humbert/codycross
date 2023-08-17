@@ -14,7 +14,6 @@ let fileArray6 = openLengthFileToArray(6);
 
 function filterByContainedLetter(arr, letter, notPosition) {
   let res = arr.filter((w) => w.includes(letter) && w[notPosition] !== letter);
-
   return res;
 }
 
@@ -28,6 +27,35 @@ function filterByValidLetter(arr, letter, position) {
   return res;
 }
 
-console.log(filterByContainedLetter(fileArray5, "h", 1));
-console.log(filterByNotContainedLetter(fileArray5, "e"));
-console.log(filterByValidLetter(fileArray5, "z", 3));
+function chainFilters(
+  arr,
+  containConditions,
+  notContainedConditions,
+  validConditions
+) {
+  let res = arr;
+  for (let i = 0; i < containConditions.length; i++) {
+    res = filterByContainedLetter(
+      res,
+      containConditions[i][0],
+      containConditions[i][1]
+    );
+  }
+  for (let i = 0; i < notContainedConditions.length; i++) {
+    res = filterByNotContainedLetter(res, notContainedConditions[i]);
+  }
+  for (let i = 0; i < validConditions.length; i++) {
+    res = filterByValidLetter(
+      res,
+      validConditions[i][0],
+      validConditions[i][1]
+    );
+  }
+  return res;
+}
+
+const contains = ["a3", "z2"];
+const notContains = ["p", "h", "m", "b", "v", "j", "o"];
+const valid = ["e4"];
+
+console.log(chainFilters(fileArray5, contains, notContains, valid));
