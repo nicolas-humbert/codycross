@@ -10,7 +10,8 @@ function parseHtml(dom, letter) {
   let preWords = [];
   for (let i = 0; i < separateLines.length; i++) {
     let word = separateLines[i].split(`"`)[0];
-    preWords.push(word.replace("(-)", "-").replace("(s)", "").toLowerCase());
+
+    preWords.push(cleanWord(word));
   }
 
   let res = [];
@@ -47,6 +48,27 @@ function createTxtFiles() {
     let l = ALPHABET[i];
     handleLetterLogic(l);
   }
+}
+
+function cleanWord(w) {
+  return w
+    .replace("(-)", "-")
+    .replace("(s)", "")
+    .toLowerCase()
+    .replace(/à/g, "a")
+    .replace(/â/g, "a")
+    .replace(/ä/g, "a")
+    .replace(/é/g, "e")
+    .replace(/è/g, "e")
+    .replace(/ê/g, "e")
+    .replace(/ë/g, "e")
+    .replace(/î/g, "i")
+    .replace(/ï/g, "i")
+    .replace(/ô/g, "o")
+    .replace(/ö/g, "o")
+    .replace(/ù/g, "u")
+    .replace(/û/g, "u")
+    .replace(/ü/g, "u");
 }
 
 createTxtFiles();
